@@ -1,33 +1,32 @@
-import { SanityDocument } from "@sanity/client";
 import { draftMode } from "next/headers";
-import Post from "@/app/_components/Post";
 import PreviewProvider from "@/app/_components/PreviewProvider";
-import PreviewPost from "@/app/_components/PreviewPost";
-import { postPathsQuery, postQuery } from "@/sanity/lib/queries";
+import PreviewResume from "@/app/_components/PreviewResume";
+import { resumePathsQuery, resumeQuery } from "@/sanity/lib/queries";
 import { sanityFetch, token } from "@/sanity/lib/sanityFetch";
 import { client } from "@/sanity/lib/client";
+import { ResumeType } from "@/type";
 
 // Prepare Next.js to know which routes already exist
 export async function generateStaticParams() {
-  const posts = await client.fetch(postPathsQuery);
+  const posts = await client.fetch(resumePathsQuery);
 
   return posts;
 }
 
 export default async function Page({ params }: { params: any }) {
   const isDraftMode = draftMode().isEnabled;
-  const post = await sanityFetch<SanityDocument>({
-    query: postQuery,
+  const post = await sanityFetch<ResumeType>({
+    query: resumeQuery,
     params,
   });
 
   if (isDraftMode && token) {
     return (
       <PreviewProvider token={token}>
-        <PreviewPost post={post} />
+        <PreviewResume post={post} />
       </PreviewProvider>
     );
   }
 
-  return <Post post={post} />;
+  return <PreviewResume post={post} />;
 }

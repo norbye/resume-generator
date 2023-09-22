@@ -8,6 +8,11 @@ import {
   PDFViewer,
   Image,
 } from "@react-pdf/renderer";
+import { ResumeType } from "@/type";
+import imageUrlBuilder from "@sanity/image-url";
+import { client } from "@/sanity/lib/client";
+
+const builder = imageUrlBuilder(client);
 
 // Create styles
 const styles = StyleSheet.create({
@@ -86,92 +91,95 @@ const styles = StyleSheet.create({
   },
 });
 
-const data = {
-  name: "Magnus Ingnes Sagmo",
-  title: "Konsulent",
-  phone: "+47 918 00 994",
-  email: "magnus.sagmo@juniorconsulting.com",
-  description:
-    "Magnus går tredjeåret på master i Datateknologi ved NTNU, med spesialisering innen databaseteknologi.  Han liker å jobbe prosjektbasert, og har en iver etter å lære nye ting, samt løse problemer på en god og effektiv måte.",
-  background: [
-    {
-      from: "2020",
-      to: "2025",
-      title: "MsC Datateknologi",
-      institution: "NTNU",
-    },
-  ],
-  engagements: [
-    {
-      from: "2021",
-      to: "2022",
-      title: "Gruppeansvarlig",
-      institution: "Abakus' hovedstyre",
-    },
-    {
-      from: "2020",
-      to: "d.d.",
-      title: "Prosjektmedarbeider",
-      institution: "Abakus' arragementskomité",
-    },
-    {
-      from: "2021",
-      to: "2022",
-      title: "Bedriftskontakt",
-      institution: "itDAGENE 2022",
-    },
-  ],
-  expertise: [
-    {
-      title: "React, Next.js, TypeScript",
-      projects: [{ project: "6 prosjekter" }, { project: "1 prosjekt" }],
-    },
-    {
-      title: "Apputvikling",
-      projects: [{ project: "1 prosjekt" }],
-    },
-    {
-      title: "REST API",
-      projects: [{ project: "3 prosjekter" }],
-    },
-  ],
-  experience: [
-    {
-      employer: "Lillemini",
-      title: "Teknisk konsulent",
-      from: "Mar 2021",
-      to: "d.d.",
-      description:
-        "Magnus har vært utleid til Lillemini som app-utvikler og prosjektleder. Der har han primært jobbet med videreutvikling og oppgradering av Flutter-app, med CMS i Sanity og tilleggstjenester i Firebase, Sentry og RevenueCat.",
-    },
-    {
-      employer: "Progit Consulting",
-      title: "Fullstack-utvikler",
-      from: "Jun 2023",
-      to: "Aug 2023.",
-      description:
-        "I et team på tre jobbed Magnus med å utvikle et kustomiserbart dashboard for TaskCtrl. Hans fokusområde var å lage det nødvendige API-et, som også skulle være grunnlaget for hele den nye backenden til TaskCtrl.",
-    },
-    {
-      employer: "Equinor",
-      title: "Summer intern",
-      from: "Jun 2022",
-      to: "Aug 2022.",
-      description:
-        "I løpet av sommeren utviklet Magnus sammen med en annen sommerstudent et optimaliseringsverktøy til bruk i prosjektering av nye hydrogen-prosjekter. Prosjektet hadde en server skrevet med Flask, og et brukergrensesnitt i React.",
-    },
-    {
-      employer: "Stavanger Høyre",
-      title: "Freelance webutvikler",
-      from: "Feb 2023",
-      to: "Aug 2023",
-      description:
-        "Magnus jobber for tiden med en nettside for Høyre Stavanger. Nettsiden skal fungere som en informasjonskanal, og er tiltenkt en sentral rolle i valgkampen inn mot høstens kommunevalg. \n \n Siden er en web-applikasjon skrevet i NextJS 13, med Sanity som database og CMS, og Amplitude for dataanalyse. Det er et stort fokus på at den skal være lett å betjene for Høyre helt selvstendig etter overlevert prosjekt.",
-    },
-  ],
-};
+// const data = {
+//   name: "Magnus Ingnes Sagmo",
+//   title: "Konsulent",
+//   phone: "+47 918 00 994",
+//   email: "magnus.sagmo@juniorconsulting.com",
+//   description:
+//     "Magnus går tredjeåret på master i Datateknologi ved NTNU, med spesialisering innen databaseteknologi.  Han liker å jobbe prosjektbasert, og har en iver etter å lære nye ting, samt løse problemer på en god og effektiv måte.",
+//   background: [
+//     {
+//       from: "2020",
+//       to: "2025",
+//       title: "MsC Datateknologi",
+//       institution: "NTNU",
+//     },
+//   ],
+//   engagements: [
+//     {
+//       from: "2021",
+//       to: "2022",
+//       title: "Gruppeansvarlig",
+//       institution: "Abakus' hovedstyre",
+//     },
+//     {
+//       from: "2020",
+//       to: "d.d.",
+//       title: "Prosjektmedarbeider",
+//       institution: "Abakus' arragementskomité",
+//     },
+//     {
+//       from: "2021",
+//       to: "2022",
+//       title: "Bedriftskontakt",
+//       institution: "itDAGENE 2022",
+//     },
+//   ],
+//   expertise: [
+//     {
+//       title: "React, Next.js, TypeScript",
+//       projects: [{ project: "6 prosjekter" }, { project: "1 prosjekt" }],
+//     },
+//     {
+//       title: "Apputvikling",
+//       projects: [{ project: "1 prosjekt" }],
+//     },
+//     {
+//       title: "REST API",
+//       projects: [{ project: "3 prosjekter" }],
+//     },
+//   ],
+//   experience: [
+//     {
+//       employer: "Lillemini",
+//       title: "Teknisk konsulent",
+//       from: "Mar 2021",
+//       to: "d.d.",
+//       description:
+//         "Magnus har vært utleid til Lillemini som app-utvikler og prosjektleder. Der har han primært jobbet med videreutvikling og oppgradering av Flutter-app, med CMS i Sanity og tilleggstjenester i Firebase, Sentry og RevenueCat.",
+//     },
+//     {
+//       employer: "Progit Consulting",
+//       title: "Fullstack-utvikler",
+//       from: "Jun 2023",
+//       to: "Aug 2023.",
+//       description:
+//         "I et team på tre jobbed Magnus med å utvikle et kustomiserbart dashboard for TaskCtrl. Hans fokusområde var å lage det nødvendige API-et, som også skulle være grunnlaget for hele den nye backenden til TaskCtrl.",
+//     },
+//     {
+//       employer: "Equinor",
+//       title: "Summer intern",
+//       from: "Jun 2022",
+//       to: "Aug 2022.",
+//       description:
+//         "I løpet av sommeren utviklet Magnus sammen med en annen sommerstudent et optimaliseringsverktøy til bruk i prosjektering av nye hydrogen-prosjekter. Prosjektet hadde en server skrevet med Flask, og et brukergrensesnitt i React.",
+//     },
+//     {
+//       employer: "Stavanger Høyre",
+//       title: "Freelance webutvikler",
+//       from: "Feb 2023",
+//       to: "Aug 2023",
+//       description:
+//         "Magnus jobber for tiden med en nettside for Høyre Stavanger. Nettsiden skal fungere som en informasjonskanal, og er tiltenkt en sentral rolle i valgkampen inn mot høstens kommunevalg. \n \n Siden er en web-applikasjon skrevet i NextJS 13, med Sanity som database og CMS, og Amplitude for dataanalyse. Det er et stort fokus på at den skal være lett å betjene for Høyre helt selvstendig etter overlevert prosjekt.",
+//     },
+//   ],
+// };
 
-const Resume = () => (
+interface Props {
+  data: ResumeType;
+}
+const Resume = ({ data }: Props) => (
   <Document>
     <Page size="A4" style={styles.page}>
       <View style={styles.header}>
@@ -183,7 +191,11 @@ const Resume = () => (
               width: "120px",
               borderRadius: "50%",
             }}
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZedbqvFq9wEKHdTqbqwZmka6bXs13bRKVpUjRKnofi8l2hEu8EoNxLsg1b4jAa_4b_w4&usqp=CAU"
+            src={builder
+              .image(data.employee.image)
+              .width(300)
+              .height(300)
+              .url()}
           />
         </View>
         <View style={styles.headerRight}>
@@ -191,9 +203,9 @@ const Resume = () => (
             {data.title}
           </Text>
           <Text style={{ color: "#445663", fontSize: 24, marginVertical: 3 }}>
-            {data.name}
+            {data.employee.name}
           </Text>
-          <Text style={{ fontSize: 11 }}>{data.description}</Text>
+          <Text style={{ fontSize: 11 }}>{data.employee.bio}</Text>
         </View>
       </View>
       <View style={styles.section}>
@@ -220,7 +232,7 @@ const Resume = () => (
                   {item.title}
                 </Text>
                 <Text style={{ fontSize: 12, marginTop: "2px" }}>
-                  {item.institution}
+                  {item.intitution}
                 </Text>
               </View>
             ))}
@@ -239,7 +251,7 @@ const Resume = () => (
             Engasjement{" "}
           </Text>
           <View style={{ paddingLeft: "10px", color: "#445663" }}>
-            {data.engagements.map((item) => (
+            {data.engagement.map((item) => (
               <View style={{ marginTop: "15px" }}>
                 <Text
                   style={{ fontSize: 9 }}
@@ -248,7 +260,7 @@ const Resume = () => (
                   {item.title}
                 </Text>
                 <Text style={{ fontSize: 12, marginTop: "2px" }}>
-                  {item.institution}
+                  {item.organisation}
                 </Text>
               </View>
             ))}
@@ -282,7 +294,7 @@ const Resume = () => (
                 >
                   {item.projects.map((project) => (
                     <View>
-                      <Text style={{ fontSize: 9 }}>{project.project}</Text>
+                      <Text style={{ fontSize: 9 }}>{project}</Text>
                     </View>
                   ))}
                 </View>
@@ -340,9 +352,9 @@ const Resume = () => (
       </View>
       <View style={styles.footer}>
         <View style={{ display: "flex", flexDirection: "row" }}>
-          <Text>{data.email}</Text>
+          <Text>{data.employee.email}</Text>
           <Text style={{ marginHorizontal: "3px" }}>|</Text>
-          <Text>{data.phone}</Text>
+          <Text>{data.employee.phone}</Text>
         </View>
 
         <Image
@@ -376,7 +388,7 @@ const sectionText = (text: String) => {
   );
 };
 
-const ResumeView = () => {
+const ResumeView = ({ data }: Props) => {
   return (
     <PDFViewer
       className="absolute"
@@ -384,7 +396,7 @@ const ResumeView = () => {
       height={"100%"}
       showToolbar={true}
     >
-      <Resume />
+      <Resume data={data} />
     </PDFViewer>
   );
 };

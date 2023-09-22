@@ -28,6 +28,7 @@
     "react-pdf": "^7.3.3",
     "sanity": "^3.16.7",
     "sanity-plugin-iframe-pane": "^2.5.7",
+    "sanity-plugin-media": "^2.2.2",
     "server-only": "^0.0.1",
     "styled-components": "5.2",
     "suspend-react": "^0.1.3",

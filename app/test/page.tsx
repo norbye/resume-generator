@@ -5,9 +5,10 @@ import Resume from "../_components/pdf/Resume";
 
 const Home: NextPage = () => {
   return (
-    <PDFViewer>
-      <Resume />
-    </PDFViewer>
+    <></>
+    // <PDFViewer>
+    //   <Resume />
+    // </PDFViewer>
   );
 };
 

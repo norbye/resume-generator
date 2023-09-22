@@ -36,22 +36,22 @@ export default defineType({
             {
               name: "title",
               title: "Tittel",
-              type: "text",
+              type: "string",
             },
             {
               name: "from",
               title: "Fra",
-              type: "text",
+              type: "string",
             },
             {
               name: "to",
               title: "Til",
-              type: "text",
+              type: "string",
             },
             {
               name: "institution",
               title: "Institusjon",
-              type: "text",
+              type: "string",
             },
           ],
         },
@@ -68,22 +68,22 @@ export default defineType({
             {
               name: "title",
               title: "Tittel",
-              type: "text",
+              type: "string",
             },
             {
               name: "from",
               title: "Fra",
-              type: "text",
+              type: "string",
             },
             {
               name: "to",
               title: "Til",
-              type: "text",
+              type: "string",
             },
             {
               name: "organisation",
               title: "Organisasjon",
-              type: "text",
+              type: "string",
             },
           ],
         },
@@ -103,7 +103,7 @@ export default defineType({
               type: "string",
             },
             {
-              name: "from",
+              name: "projects",
               title: "prosjekter",
               type: "array",
               of: [
@@ -132,17 +132,17 @@ export default defineType({
             {
               name: "title",
               title: "Stillingstittel",
-              type: "text",
+              type: "string",
             },
             {
               name: "from",
               title: "Fra",
-              type: "text",
+              type: "string",
             },
             {
               name: "to",
               title: "Til",
-              type: "text",
+              type: "string",
             },
             {
               name: "description",
