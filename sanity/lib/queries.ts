@@ -3,8 +3,22 @@ import { groq } from "next-sanity";
 
 // get all resumes
 export const resumesQuery = groq`
-    *[_type == "resume" && defined(slug.current)]{
-        _id, title, slug
+    *[_type == "resume" && defined(slug.current)][] {
+        title, 
+        slug, 
+        background,
+        engagement,
+        expertise, 
+        experience,
+        publishedAt,
+        employee -> {
+            name, 
+            phone, 
+            email, 
+            bio, 
+            position,
+            image
+        }, 
     }`;
 
 // get a single resume by its slug

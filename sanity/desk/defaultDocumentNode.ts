@@ -3,10 +3,9 @@ import Iframe from "sanity-plugin-iframe-pane";
 import { SanityDocument } from "next-sanity";
 
 function getPreviewUrl(doc: SanityDocument) {
-  console.log(`printer: ${doc}`);
   return doc?.slug?.current
-    ? `${"http://localhost:3000"}/${doc.slug.current}`
-    : "http://localhost:3000";
+    ? `${"http://localhost:3000/api/preview?slug="}${doc.slug.current}`
+    : "http://localhost:3000/api/preview";
 }
 
 export const defaultDocumentNode: DefaultDocumentNodeResolver = (

@@ -8,14 +8,14 @@ import { ResumeType } from "@/type";
 
 // Prepare Next.js to know which routes already exist
 export async function generateStaticParams() {
-  const posts = await client.fetch(resumePathsQuery);
+  const resumes = await client.fetch(resumePathsQuery);
 
-  return posts;
+  return resumes;
 }
 
 export default async function Page({ params }: { params: any }) {
   const isDraftMode = draftMode().isEnabled;
-  const post = await sanityFetch<ResumeType>({
+  const resume = await sanityFetch<ResumeType>({
     query: resumeQuery,
     params,
   });
@@ -23,10 +23,10 @@ export default async function Page({ params }: { params: any }) {
   if (isDraftMode && token) {
     return (
       <PreviewProvider token={token}>
-        <PreviewResume post={post} />
+        <PreviewResume resume={resume} />
       </PreviewProvider>
     );
   }
 
-  return <PreviewResume post={post} />;
+  return <PreviewResume resume={resume} />;
 }

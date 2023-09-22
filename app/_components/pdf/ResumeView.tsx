@@ -3,7 +3,7 @@
 import { ResumeType } from "@/type";
 import dynamic from "next/dynamic";
 
-const ResumePDF = dynamic(() => import("./Resume"), {
+const ResumePDF = dynamic(() => import("./ResumePDF"), {
   ssr: false,
 });
 

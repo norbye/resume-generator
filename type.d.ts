@@ -1,4 +1,4 @@
-import { Image } from "sanity";
+import { Image, Slug } from "sanity";
 
 type Base = {
   _createdAt: string;
@@ -10,7 +10,7 @@ type Base = {
 
 interface ResumeType extends base {
   title: string;
-  slug: string;
+  slug: Slug;
   background: [
     {
       title: string;

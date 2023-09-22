@@ -259,7 +259,13 @@ const Resume = ({ data, logo }: Props) => (
                     <View style={styles.experienceCircle}>
                       <div></div>
                     </View>
-                    <Text style={{ fontSize: 9, marginTop: "6px" }}>
+                    <Text
+                      style={{
+                        fontSize: 9,
+                        marginTop: "6px",
+                        fontStyle: "Helvetica-Bold",
+                      }}
+                    >
                       {item.employer}
                     </Text>
                   </View>
