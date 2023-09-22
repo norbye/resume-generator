@@ -6,6 +6,9 @@ import { draftMode } from "next/headers";
 import PreviewProvider from "./_components/PreviewProvider";
 import PreviewPosts from "./_components/PreviewPosts";
 
+import Resume from "./_components/pdf/Resume";
+import ResumeView from "./_components/pdf/ResumeView";
+
 export default async function Home() {
   const posts = await sanityFetch<SanityDocument[]>({ query: postsQuery });
   const isDraftMode = draftMode().isEnabled;
@@ -13,9 +16,9 @@ export default async function Home() {
   if (isDraftMode && token) {
     return (
       <PreviewProvider token={token}>
-        <PreviewPosts posts={posts} />
+        <ResumeView />
       </PreviewProvider>
     );
   }
-  return <Posts posts={posts} />;
+  return <ResumeView />;
 }
