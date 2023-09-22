@@ -4,9 +4,7 @@ import { postsQuery } from "@/sanity/lib/queries";
 import { sanityFetch, token } from "@/sanity/lib/sanityFetch";
 import { draftMode } from "next/headers";
 import PreviewProvider from "./_components/PreviewProvider";
-import PreviewPosts from "./_components/PreviewPosts";
 
-import Resume from "./_components/pdf/Resume";
 import ResumeView from "./_components/pdf/ResumeView";
 
 export default async function Home() {

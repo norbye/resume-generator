@@ -1,13 +1,28 @@
 import { defineField, defineType } from "sanity";
 
 export default defineType({
-  name: "author",
-  title: "Author",
+  name: "employee",
+  title: "Konsulent",
   type: "document",
   fields: [
     defineField({
       name: "name",
-      title: "Name",
+      title: "Navn",
+      type: "string",
+    }),
+    defineField({
+      name: "position",
+      title: "Stilling",
+      type: "string",
+    }),
+    defineField({
+      name: "phone",
+      title: "Telefon-nummer",
+      type: "string",
+    }),
+    defineField({
+      name: "email",
+      title: "E-mail",
       type: "string",
     }),
     defineField({
@@ -21,7 +36,7 @@ export default defineType({
     }),
     defineField({
       name: "image",
-      title: "Image",
+      title: "Bilde",
       type: "image",
       options: {
         hotspot: true,
@@ -36,16 +51,17 @@ export default defineType({
     }),
     defineField({
       name: "bio",
-      title: "Bio",
-      type: "array",
-      of: [
-        {
-          title: "Block",
-          type: "block",
-          styles: [{ title: "Normal", value: "normal" }],
-          lists: [],
-        },
-      ],
+      title: "Om deg",
+      type: "string",
+      // type: "array",
+      // of: [
+      //   {
+      //     title: "Block",
+      //     type: "block",
+      //     styles: [{ title: "Normal", value: "normal" }],
+      //     lists: [],
+      //   },
+      // ],
     }),
   ],
   preview: {
