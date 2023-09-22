@@ -33,8 +33,8 @@ export const resumePathsQuery = groq`
         "params": {"slug": slug.current}
     }`;
 
-export const logoQuery = ({ type }: { type: LogoTypes }) => {
+export const logoQuery = (type: LogoTypes) => {
   return groq`
-    *[_type == "sanity.imageAsset" && originalFilename == 'logo-full-white.png'] 
+    *[_type == "sanity.imageAsset" && originalFilename == 'plain-logo-white.png'][0] 
 `;
 };
