@@ -16,7 +16,6 @@ import { LogoTypes } from "@/enums/LogoTypes";
 import { Image as SanityImage } from "sanity";
 
 const builder = imageUrlBuilder(client);
-const logo = logoQuery(LogoTypes.PlainWhite);
 
 // Create styles
 const styles = StyleSheet.create({
@@ -97,7 +96,7 @@ const styles = StyleSheet.create({
 
 interface Props {
   data: ResumeType;
-  logo: SanityImage;
+  logo?: SanityImage;
 }
 const Resume = ({ data, logo }: Props) => (
   <Document>
@@ -121,10 +120,23 @@ const Resume = ({ data, logo }: Props) => (
           )}
         </View>
         <View style={styles.headerRight}>
-          <Text style={{ color: "#445663", fontSize: 12, fontWeight: "bold" }}>
+          <Text
+            style={{
+              color: "#445663",
+              fontSize: 12,
+              fontFamily: "Helvetica-Bold",
+            }}
+          >
             {data.employee?.position ?? "Stilling"}
           </Text>
-          <Text style={{ color: "#445663", fontSize: 24, marginVertical: 3 }}>
+          <Text
+            style={{
+              color: "#445663",
+              fontSize: 24,
+              marginVertical: 3,
+              fontFamily: "Helvetica-Bold",
+            }}
+          >
             {data.employee?.name ?? "Navn navnesen"}
           </Text>
           <Text style={{ fontSize: 11 }}>{data.employee?.bio ?? "Om deg"}</Text>
@@ -138,7 +150,7 @@ const Resume = ({ data, logo }: Props) => (
               {
                 color: "#595959",
                 fontSize: 16,
-                fontWeight: "bold",
+                fontFamily: "Helvetica-Bold",
               },
             ]}
           >
@@ -147,7 +159,7 @@ const Resume = ({ data, logo }: Props) => (
           <View style={{ paddingLeft: "10px", color: "#445663" }}>
             {data.background &&
               data.background.map((item) => (
-                <View style={{ marginTop: "15px" }}>
+                <View key={item.title} style={{ marginTop: "15px" }}>
                   <Text
                     style={{ fontSize: 9 }}
                   >{`(${item.from} - ${item.to})`}</Text>
@@ -166,7 +178,7 @@ const Resume = ({ data, logo }: Props) => (
               {
                 color: "#595959",
                 fontSize: 16,
-                fontWeight: "bold",
+                fontFamily: "Helvetica-Bold",
                 marginTop: "20px",
               },
             ]}
@@ -176,7 +188,7 @@ const Resume = ({ data, logo }: Props) => (
           <View style={{ paddingLeft: "10px", color: "#445663" }}>
             {data.engagement &&
               data.engagement.map((item) => (
-                <View style={{ marginTop: "15px" }}>
+                <View key={item.title} style={{ marginTop: "15px" }}>
                   <Text
                     style={{ fontSize: 9 }}
                   >{`(${item.from} - ${item.to})`}</Text>
@@ -195,7 +207,7 @@ const Resume = ({ data, logo }: Props) => (
               {
                 color: "#595959",
                 fontSize: 16,
-                fontWeight: "bold",
+                fontFamily: "Helvetica-Bold",
                 marginTop: "20px",
               },
             ]}
@@ -205,7 +217,7 @@ const Resume = ({ data, logo }: Props) => (
           <View style={{ paddingLeft: "10px", color: "#445663" }}>
             {data.expertise &&
               data.expertise.map((item) => (
-                <View style={{ marginTop: "15px" }}>
+                <View key={item.title} style={{ marginTop: "15px" }}>
                   <Text style={{ fontSize: 14, marginTop: "2px" }}>
                     {item.title}
                   </Text>
@@ -219,8 +231,10 @@ const Resume = ({ data, logo }: Props) => (
                   >
                     {item.projects &&
                       item.projects.map((project) => (
-                        <View>
-                          <Text style={{ fontSize: 9 }}>{project}</Text>
+                        <View key={project}>
+                          <Text style={{ fontSize: 9, marginBottom: "1.5px" }}>
+                            {project}
+                          </Text>
                         </View>
                       ))}
                   </View>
@@ -230,11 +244,12 @@ const Resume = ({ data, logo }: Props) => (
         </View>
         <View style={[styles.sectionRight, { color: "#445663" }]}>
           {sectionText("Erfaring")}
-          <View style={{ marginTop: "15px" }}>
+          <View style={{ marginTop: "20px" }}>
             {data.experience &&
               data.experience.map((item, index) => (
                 <>
                   <View
+                    key={item.title}
                     style={{
                       display: "flex",
                       flexDirection: "row",
@@ -253,19 +268,23 @@ const Resume = ({ data, logo }: Props) => (
                       styles.grayLine,
                       {
                         paddingBottom: `${
-                          index == data.experience.length - 1 ? "" : "15px"
+                          index == data.experience.length - 1 ? "" : "20px"
                         }`,
                       },
                     ]}
                   >
-                    <Text style={{ fontSize: 14, marginTop: "6px" }}>
+                    <Text
+                      style={{
+                        fontSize: 14,
+                        marginTop: "6px",
+                      }}
+                    >
                       {item.title}
                     </Text>
                     <Text
                       style={{
                         fontSize: 12,
                         marginTop: "2px",
-                        fontWeight: "bold",
                       }}
                     >{`${item.from} - ${item.to}`}</Text>
                     <Text
@@ -291,7 +310,7 @@ const Resume = ({ data, logo }: Props) => (
             height: "30px",
           }}
           // src={"../../../public/jrc-logo-white.png"}
-          src={builder.image(logo).url()}
+          src={logo && builder.image(logo).url()}
         />
       </View>
     </Page>
@@ -306,7 +325,7 @@ const sectionText = (text: String) => {
         {
           color: "#595959",
           fontSize: 16,
-          fontWeight: "bold",
+          fontFamily: "Helvetica-Bold",
         },
       ]}
     >
@@ -317,7 +336,6 @@ const sectionText = (text: String) => {
 
 const ResumeView = async ({ data }: Props) => {
   const logo = await client.fetch(logoQuery(LogoTypes.PlainWhite));
-  console.log(builder.image(logo).width(400).height(400).url());
   return (
     <PDFViewer
       className="absolute"
