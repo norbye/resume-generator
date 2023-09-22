@@ -184,28 +184,30 @@ const Resume = ({ data }: Props) => (
     <Page size="A4" style={styles.page}>
       <View style={styles.header}>
         <View style={styles.headerRight}>
-          <Image
-            style={{
-              marginLeft: "100px",
-              height: "120px",
-              width: "120px",
-              borderRadius: "50%",
-            }}
-            src={builder
-              .image(data.employee.image)
-              .width(300)
-              .height(300)
-              .url()}
-          />
+          {data.employee?.image && (
+            <Image
+              style={{
+                marginLeft: "100px",
+                height: "120px",
+                width: "120px",
+                borderRadius: "50%",
+              }}
+              src={builder
+                .image(data.employee.image)
+                .width(300)
+                .height(300)
+                .url()}
+            />
+          )}
         </View>
         <View style={styles.headerRight}>
           <Text style={{ color: "#445663", fontSize: 12, fontWeight: "bold" }}>
-            {data.title}
+            {data.employee?.position ?? "Stilling"}
           </Text>
           <Text style={{ color: "#445663", fontSize: 24, marginVertical: 3 }}>
-            {data.employee.name}
+            {data.employee?.name ?? "Navn navnesen"}
           </Text>
-          <Text style={{ fontSize: 11 }}>{data.employee.bio}</Text>
+          <Text style={{ fontSize: 11 }}>{data.employee?.bio ?? "Om deg"}</Text>
         </View>
       </View>
       <View style={styles.section}>
@@ -223,19 +225,20 @@ const Resume = ({ data }: Props) => (
             Bakgrunn{" "}
           </Text>
           <View style={{ paddingLeft: "10px", color: "#445663" }}>
-            {data.background.map((item) => (
-              <View style={{ marginTop: "15px" }}>
-                <Text
-                  style={{ fontSize: 9 }}
-                >{`(${item.from} - ${item.to})`}</Text>
-                <Text style={{ fontSize: 14, marginTop: "2px" }}>
-                  {item.title}
-                </Text>
-                <Text style={{ fontSize: 12, marginTop: "2px" }}>
-                  {item.intitution}
-                </Text>
-              </View>
-            ))}
+            {data.background &&
+              data.background.map((item) => (
+                <View style={{ marginTop: "15px" }}>
+                  <Text
+                    style={{ fontSize: 9 }}
+                  >{`(${item.from} - ${item.to})`}</Text>
+                  <Text style={{ fontSize: 14, marginTop: "2px" }}>
+                    {item.title}
+                  </Text>
+                  <Text style={{ fontSize: 12, marginTop: "2px" }}>
+                    {item.intitution}
+                  </Text>
+                </View>
+              ))}
           </View>
           <Text
             style={[
@@ -251,19 +254,20 @@ const Resume = ({ data }: Props) => (
             Engasjement{" "}
           </Text>
           <View style={{ paddingLeft: "10px", color: "#445663" }}>
-            {data.engagement.map((item) => (
-              <View style={{ marginTop: "15px" }}>
-                <Text
-                  style={{ fontSize: 9 }}
-                >{`(${item.from} - ${item.to})`}</Text>
-                <Text style={{ fontSize: 14, marginTop: "2px" }}>
-                  {item.title}
-                </Text>
-                <Text style={{ fontSize: 12, marginTop: "2px" }}>
-                  {item.organisation}
-                </Text>
-              </View>
-            ))}
+            {data.engagement &&
+              data.engagement.map((item) => (
+                <View style={{ marginTop: "15px" }}>
+                  <Text
+                    style={{ fontSize: 9 }}
+                  >{`(${item.from} - ${item.to})`}</Text>
+                  <Text style={{ fontSize: 14, marginTop: "2px" }}>
+                    {item.title}
+                  </Text>
+                  <Text style={{ fontSize: 12, marginTop: "2px" }}>
+                    {item.organisation}
+                  </Text>
+                </View>
+              ))}
           </View>
           <Text
             style={[
@@ -279,82 +283,85 @@ const Resume = ({ data }: Props) => (
             Fageskpertise{" "}
           </Text>
           <View style={{ paddingLeft: "10px", color: "#445663" }}>
-            {data.expertise.map((item) => (
-              <View style={{ marginTop: "15px" }}>
-                <Text style={{ fontSize: 14, marginTop: "2px" }}>
-                  {item.title}
-                </Text>
+            {data.expertise &&
+              data.expertise.map((item) => (
+                <View style={{ marginTop: "15px" }}>
+                  <Text style={{ fontSize: 14, marginTop: "2px" }}>
+                    {item.title}
+                  </Text>
 
-                <View
-                  style={{
-                    display: "flex",
-                    marginTop: "2px",
-                    flexDirection: "column",
-                  }}
-                >
-                  {item.projects.map((project) => (
-                    <View>
-                      <Text style={{ fontSize: 9 }}>{project}</Text>
-                    </View>
-                  ))}
+                  <View
+                    style={{
+                      display: "flex",
+                      marginTop: "2px",
+                      flexDirection: "column",
+                    }}
+                  >
+                    {item.projects &&
+                      item.projects.map((project) => (
+                        <View>
+                          <Text style={{ fontSize: 9 }}>{project}</Text>
+                        </View>
+                      ))}
+                  </View>
                 </View>
-              </View>
-            ))}
+              ))}
           </View>
         </View>
         <View style={[styles.sectionRight, { color: "#445663" }]}>
           {sectionText("Erfaring")}
           <View style={{ marginTop: "15px" }}>
-            {data.experience.map((item, index) => (
-              <>
-                <View
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                  }}
-                >
-                  <View style={styles.experienceCircle}>
-                    <div></div>
-                  </View>
-                  <Text style={{ fontSize: 9, marginTop: "6px" }}>
-                    {item.employer}
-                  </Text>
-                </View>
-                <View
-                  style={[
-                    styles.grayLine,
-                    {
-                      paddingBottom: `${
-                        index == data.experience.length - 1 ? "" : "15px"
-                      }`,
-                    },
-                  ]}
-                >
-                  <Text style={{ fontSize: 14, marginTop: "6px" }}>
-                    {item.title}
-                  </Text>
-                  <Text
+            {data.experience &&
+              data.experience.map((item, index) => (
+                <>
+                  <View
                     style={{
-                      fontSize: 12,
-                      marginTop: "2px",
-                      fontWeight: "bold",
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
                     }}
-                  >{`${item.from} - ${item.to}`}</Text>
-                  <Text style={{ fontSize: 9, marginTop: "2px" }}>
-                    {item.description}
-                  </Text>
-                </View>
-              </>
-            ))}
+                  >
+                    <View style={styles.experienceCircle}>
+                      <div></div>
+                    </View>
+                    <Text style={{ fontSize: 9, marginTop: "6px" }}>
+                      {item.employer}
+                    </Text>
+                  </View>
+                  <View
+                    style={[
+                      styles.grayLine,
+                      {
+                        paddingBottom: `${
+                          index == data.experience.length - 1 ? "" : "15px"
+                        }`,
+                      },
+                    ]}
+                  >
+                    <Text style={{ fontSize: 14, marginTop: "6px" }}>
+                      {item.title}
+                    </Text>
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        marginTop: "2px",
+                        fontWeight: "bold",
+                      }}
+                    >{`${item.from} - ${item.to}`}</Text>
+                    <Text style={{ fontSize: 9, marginTop: "2px" }}>
+                      {item.description}
+                    </Text>
+                  </View>
+                </>
+              ))}
           </View>
         </View>
       </View>
       <View style={styles.footer}>
         <View style={{ display: "flex", flexDirection: "row" }}>
-          <Text>{data.employee.email}</Text>
+          <Text>{data.employee?.email ?? "telefonnummer"}</Text>
           <Text style={{ marginHorizontal: "3px" }}>|</Text>
-          <Text>{data.employee.phone}</Text>
+          <Text>{data.employee?.phone ?? "epost"}</Text>
         </View>
 
         <Image

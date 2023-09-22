@@ -6,18 +6,9 @@ export default defineType({
   type: "document",
   fields: [
     defineField({
-      name: "title",
-      title: "Tittel",
-      type: "string",
-    }),
-    defineField({
       name: "slug",
-      title: "Slug",
+      title: "Slug (f.eks. 'fornavn-etternavn')",
       type: "slug",
-      options: {
-        source: "title",
-        maxLength: 96,
-      },
     }),
     defineField({
       name: "employee",
