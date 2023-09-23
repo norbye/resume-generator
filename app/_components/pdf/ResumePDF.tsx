@@ -7,6 +7,7 @@ import {
   StyleSheet,
   PDFViewer,
   Image,
+  Font,
 } from "@react-pdf/renderer";
 import { ResumeType } from "@/type";
 import imageUrlBuilder from "@sanity/image-url";
@@ -17,11 +18,22 @@ import { Image as SanityImage } from "sanity";
 
 const builder = imageUrlBuilder(client);
 
+Font.register({
+  family: "Lato",
+  fonts: [
+    {
+      src: "https://fonts.gstatic.com/s/lato/v24/S6uyw4BMUTPHvxk6XweuBCY.ttf",
+      fontWeight: 400,
+    },
+  ],
+});
+
 // Create styles
 const styles = StyleSheet.create({
   page: {
     flexDirection: "column",
     backgroundColor: "#FFFFFF",
+    fontFamily: "Lato",
   },
   header: {
     marginVertical: "45px",
