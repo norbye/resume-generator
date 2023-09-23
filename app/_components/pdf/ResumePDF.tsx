@@ -18,22 +18,45 @@ import { Image as SanityImage } from "sanity";
 
 const builder = imageUrlBuilder(client);
 
-// Font.register({
-//   family: "Lato",
-//   fonts: [
-//     {
-//       src: "https://fonts.gstatic.com/s/lato/v24/S6uyw4BMUTPHvxk6XweuBCY.ttf",
-//       fontWeight: 400,
-//     },
-//   ],
-// });
+Font.register({
+  family: "Lato",
+  fonts: [
+    {
+      src: "/fonts/Lato-Regular.ttf",
+      fontWeight: "normal",
+    },
+    {
+      src: "/fonts/Lato-Bold.ttf",
+      fontWeight: "bold",
+    },
+    {
+      src: "/fonts/Lato-BoldItalic.ttf",
+      fontWeight: "bold",
+      fontStyle: "italic",
+    },
+    {
+      src: "/fonts/Lato-Italic.ttf",
+      fontWeight: "normal",
+      fontStyle: "italic",
+    },
+    {
+      src: "/fonts/Lato-Light.ttf",
+      fontWeight: "light",
+    },
+    {
+      src: "/fonts/Lato-LightItalic.ttf",
+      fontWeight: "light",
+      fontStyle: "italic",
+    },
+  ],
+});
 
 // Create styles
 const styles = StyleSheet.create({
   page: {
     flexDirection: "column",
     backgroundColor: "#FFFFFF",
-    // fontFamily: "Lato",
+    fontFamily: "Lato",
   },
   header: {
     marginVertical: "45px",
@@ -71,23 +94,23 @@ const styles = StyleSheet.create({
     borderLeftWidth: "3px",
     borderColor: "#df0016",
     padding: "0 10px",
+    color: "#595959",
+    fontSize: 16,
+    fontWeight: "bold",
   },
   grayLine: {
     marginLeft: "2.5px",
     borderLeft: "solid",
     borderLeftWidth: "1px",
     borderColor: "#595959",
-    paddingLeft: "18px",
-  },
-  text9: {
-    fontSize: 9,
+    paddingLeft: "24px",
   },
   experienceCircle: {
     height: "6px",
     width: "6px",
     backgroundColor: "#df0016",
     borderRadius: "50%",
-    marginRight: "16px",
+    marginRight: "22px",
   },
   footer: {
     backgroundColor: "#333333",
@@ -134,9 +157,10 @@ const Resume = ({ data, logo }: Props) => (
         <View style={styles.headerRight}>
           <Text
             style={{
+              marginTop: "16px",
               color: "#445663",
               fontSize: 12,
-              fontFamily: "Helvetica-Bold",
+              fontWeight: "bold",
             }}
           >
             {data.employee?.position ?? "Stilling"}
@@ -146,40 +170,48 @@ const Resume = ({ data, logo }: Props) => (
               color: "#445663",
               fontSize: 24,
               marginVertical: 3,
-              fontFamily: "Helvetica-Bold",
+              fontWeight: "bold",
             }}
           >
             {data.employee?.name ?? "Navn navnesen"}
           </Text>
-          <Text style={{ fontSize: 11 }}>{data.employee?.bio ?? "Om deg"}</Text>
+          <Text style={{ fontSize: 11, fontWeight: "light" }}>
+            {data.employee?.bio ?? "Om deg"}
+          </Text>
         </View>
       </View>
       <View style={styles.section}>
         <View style={styles.sectionLeft}>
-          <Text
-            style={[
-              styles.redLine,
-              {
-                color: "#595959",
-                fontSize: 16,
-                fontFamily: "Helvetica-Bold",
-              },
-            ]}
+          <Text style={styles.redLine}>Bakgrunn </Text>
+          <View
+            style={{
+              paddingLeft: "10px",
+              color: "#445663",
+            }}
           >
-            Bakgrunn{" "}
-          </Text>
-          <View style={{ paddingLeft: "10px", color: "#445663" }}>
             {data.background &&
               data.background.map((item) => (
                 <View key={item.title} style={{ marginTop: "15px" }}>
                   <Text
                     style={{ fontSize: 9 }}
                   >{`(${item.from} - ${item.to})`}</Text>
-                  <Text style={{ fontSize: 14, marginTop: "2px" }}>
+                  <Text
+                    style={{
+                      fontSize: 14,
+                      marginTop: "2px",
+                      fontWeight: "bold",
+                    }}
+                  >
                     {item.title}
                   </Text>
-                  <Text style={{ fontSize: 12, marginTop: "2px" }}>
-                    {item.intitution}
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      marginTop: "2px",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {item.institution}
                   </Text>
                 </View>
               ))}
@@ -188,26 +220,40 @@ const Resume = ({ data, logo }: Props) => (
             style={[
               styles.redLine,
               {
-                color: "#595959",
-                fontSize: 16,
-                fontFamily: "Helvetica-Bold",
                 marginTop: "20px",
               },
             ]}
           >
             Engasjement{" "}
           </Text>
-          <View style={{ paddingLeft: "10px", color: "#445663" }}>
+          <View
+            style={{
+              paddingLeft: "10px",
+              color: "#445663",
+            }}
+          >
             {data.engagement &&
               data.engagement.map((item) => (
                 <View key={item.title} style={{ marginTop: "15px" }}>
                   <Text
                     style={{ fontSize: 9 }}
                   >{`(${item.from} - ${item.to})`}</Text>
-                  <Text style={{ fontSize: 14, marginTop: "2px" }}>
+                  <Text
+                    style={{
+                      fontSize: 14,
+                      marginTop: "2px",
+                      fontWeight: "bold",
+                    }}
+                  >
                     {item.title}
                   </Text>
-                  <Text style={{ fontSize: 12, marginTop: "2px" }}>
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      marginTop: "2px",
+                      fontWeight: "bold",
+                    }}
+                  >
                     {item.organisation}
                   </Text>
                 </View>
@@ -217,20 +263,28 @@ const Resume = ({ data, logo }: Props) => (
             style={[
               styles.redLine,
               {
-                color: "#595959",
-                fontSize: 16,
-                fontFamily: "Helvetica-Bold",
                 marginTop: "20px",
               },
             ]}
           >
             Fageskpertise{" "}
           </Text>
-          <View style={{ paddingLeft: "10px", color: "#445663" }}>
+          <View
+            style={{
+              paddingLeft: "10px",
+              color: "#445663",
+            }}
+          >
             {data.expertise &&
               data.expertise.map((item) => (
                 <View key={item.title} style={{ marginTop: "15px" }}>
-                  <Text style={{ fontSize: 14, marginTop: "2px" }}>
+                  <Text
+                    style={{
+                      fontSize: 14,
+                      marginTop: "2px",
+                      fontWeight: "bold",
+                    }}
+                  >
                     {item.title}
                   </Text>
 
@@ -244,7 +298,12 @@ const Resume = ({ data, logo }: Props) => (
                     {item.projects &&
                       item.projects.map((project) => (
                         <View key={project}>
-                          <Text style={{ fontSize: 9, marginBottom: "1.5px" }}>
+                          <Text
+                            style={{
+                              fontSize: 9,
+                              marginBottom: "1.5px",
+                            }}
+                          >
                             {project}
                           </Text>
                         </View>
@@ -256,7 +315,11 @@ const Resume = ({ data, logo }: Props) => (
         </View>
         <View style={[styles.sectionRight, { color: "#445663" }]}>
           {sectionText("Erfaring")}
-          <View style={{ marginTop: "20px" }}>
+          <View
+            style={{
+              marginTop: "20px",
+            }}
+          >
             {data.experience &&
               data.experience.map((item, index) => (
                 <>
@@ -275,7 +338,7 @@ const Resume = ({ data, logo }: Props) => (
                       style={{
                         fontSize: 9,
                         marginTop: "6px",
-                        fontStyle: "Helvetica-Bold",
+                        fontWeight: "bold",
                       }}
                     >
                       {item.employer}
@@ -286,7 +349,7 @@ const Resume = ({ data, logo }: Props) => (
                       styles.grayLine,
                       {
                         paddingBottom: `${
-                          index == data.experience.length - 1 ? "" : "20px"
+                          index == data.experience.length - 1 ? "" : "12px"
                         }`,
                       },
                     ]}
@@ -295,6 +358,7 @@ const Resume = ({ data, logo }: Props) => (
                       style={{
                         fontSize: 14,
                         marginTop: "6px",
+                        fontWeight: "bold",
                       }}
                     >
                       {item.title}
@@ -303,10 +367,16 @@ const Resume = ({ data, logo }: Props) => (
                       style={{
                         fontSize: 12,
                         marginTop: "2px",
+                        fontWeight: "bold",
                       }}
                     >{`${item.from} - ${item.to}`}</Text>
                     <Text
-                      style={{ color: "black", fontSize: 9, marginTop: "2px" }}
+                      style={{
+                        color: "black",
+                        fontSize: 9,
+                        marginTop: "2px",
+                        fontWeight: "light",
+                      }}
                     >
                       {item.description}
                     </Text>
@@ -327,7 +397,6 @@ const Resume = ({ data, logo }: Props) => (
           style={{
             height: "30px",
           }}
-          // src={"../../../public/jrc-logo-white.png"}
           src={logo && builder.image(logo).url()}
         />
       </View>
@@ -336,20 +405,7 @@ const Resume = ({ data, logo }: Props) => (
 );
 
 const sectionText = (text: String) => {
-  return (
-    <Text
-      style={[
-        styles.redLine,
-        {
-          color: "#595959",
-          fontSize: 16,
-          fontFamily: "Helvetica-Bold",
-        },
-      ]}
-    >
-      {text}
-    </Text>
-  );
+  return <Text style={styles.redLine}>{text}</Text>;
 };
 
 const ResumeView = async ({ data }: Props) => {

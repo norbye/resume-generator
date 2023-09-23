@@ -17,7 +17,7 @@ interface ResumeType extends base {
       title: string;
       from: string;
       to: string;
-      intitution: string;
+      institution: string;
     }
   ];
   engagement: [
