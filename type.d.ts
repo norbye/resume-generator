@@ -9,6 +9,7 @@ type Base = {
 };
 
 interface ResumeType extends base {
+  public: boolean;
   title: string;
   slug: Slug;
   background: [

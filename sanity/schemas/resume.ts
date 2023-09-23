@@ -6,6 +6,11 @@ export default defineType({
   type: "document",
   fields: [
     defineField({
+      name: "public",
+      title: "Vis på forsiden",
+      type: "boolean",
+    }),
+    defineField({
       name: "slug",
       title: "Slug (f.eks. 'fornavn-etternavn')",
       type: "slug",

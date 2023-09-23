@@ -17,7 +17,7 @@ export default function Resumes({ resumes = [] }: { resumes: ResumeType[] }) {
     <main className="max-w-5xl px-12 mt-24 bg-white container mx-auto grid grid-cols-1 ">
       <h1 className="mx-auto text-2xl p-4 font-bold mb-4">{title}</h1>
       <span className="mx-auto mb-4 flex flex-row">
-        <p>Vil du heller opprette en ny CV? </p>
+        <p>Vil du heller endre eller opprette en CV? </p>
         <Link href={"/studio"} className="ml-1 italic text-[#df0016]">
           Klikk her.
         </Link>
