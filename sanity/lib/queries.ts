@@ -50,7 +50,6 @@ export const resumePathsQuery = groq`
     }`;
 
 export const logoQuery = (type: LogoTypes) => {
-  return groq`
-    *[_type == "sanity.imageAsset" && originalFilename == 'plain-logo-white.png'][0] 
-`;
+  const query = `*[_type == "sanity.imageAsset" && originalFilename == "${type}"][0]`;
+  return groq`${query}`;
 };
