@@ -7,20 +7,13 @@ export const resumesQuery = groq`
         public,
         title, 
         slug, 
-        background,
-        engagement,
-        expertise, 
-        experience,
-        publishedAt,
         employee -> {
             name, 
-            phone, 
-            email, 
             bio, 
             position,
             image
         }, 
-    }`;
+    } | order(employee.name asc)`;
 
 // get a single resume by its slug
 export const resumeQuery = groq`
